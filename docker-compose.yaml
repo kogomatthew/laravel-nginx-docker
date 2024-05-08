@@ -11,7 +11,7 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - "7100:80"
+      - "80:80"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/deafult.conf
       - .:/var/www/app:delegated
