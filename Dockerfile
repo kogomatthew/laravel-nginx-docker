@@ -20,6 +20,8 @@ COPY . /var/www/app
 
 WORKDIR /var/www/app
 
+COPY .env.example .env
+
 RUN chown -R www-data:www-data /var/www/app \
     && chmod -R 755 /var/www/app/storage
 
@@ -31,7 +33,10 @@ COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 COPY composer.json ./
 
-RUN composer install
+RUN composer install 
+
+#generate key
+RUN php artisan key:generate
 
 #set the default command to run php-fpm
 CMD ["php-fpm"]
